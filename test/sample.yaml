@@ -1,0 +1,36 @@
+name: tachibana_test_datamodel
+apikey: "10452/15cb28aed67a701f4f4a72a45b951b5f59beed31" # Master API key for data ingestion
+
+type: elasticube
+
+# user email whom this datamodel should be shared with
+shared_users:
+
+datamodel:
+  datasets:
+    sample_datasets: # dataset name
+      type: presto # only presot right now
+      database: sample_datasets # database name
+      tables:
+        nasdaq: # table name
+          columns:
+            symbol: # column name
+              type: text
+              indexed: true
+            volume:
+              type: int
+        www_access: # table name 2
+          columns:
+            host:
+              type: text
+            code:
+              type: int
+
+  relations:
+    -
+      - dataset: sample_datasets
+        table: nasdaq
+        column: symbol
+      - dataset: sample_datasets
+        table: www_access
+        column: host
